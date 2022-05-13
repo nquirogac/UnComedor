@@ -8,7 +8,10 @@ public class Comedor {
     int ocupacion;
     int turno;
     //podriamos poner las coordenadas en donde esta para lo de la geolocalizacion al final
-    
+    public Comedor (int capac,String nomb){
+        this.capacidad = capac;
+        this.nombre = nomb;
+    }
     public Comedor(int capac, String nomb, Menu menu, Cola colaComedor) {
         this.capacidad = capac;
         this.nombre = nomb;
