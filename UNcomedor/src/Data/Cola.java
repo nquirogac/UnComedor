@@ -20,7 +20,7 @@ public class Cola {
       rear.setNext(newp);
       rear=newp;
       }
-    System.out.println("colaaaa"+rear.data.toString());
+    //System.out.println("Cola "+rear.data.toString());
     }
   public Turno deque(){
     Turno ret=null;
@@ -37,19 +37,21 @@ public class Cola {
     return ret;
     }
     
-    public boolean Empty(){
-      return ((front == null)&&(rear==null));
+  public boolean Empty(){
+    return ((front == null)&&(rear==null));
+  }
+  public void imprimirCola(){
+    Nodo ref = front;
+    System.out.println("---Cola en el comedor---");
+    while(ref!=null){
+      elementos += ref.data.toString() + "\n";
+      ref = ref.siguiente;
     }
-    public void imprimirCola(){
-      Nodo ref = front;
-      System.out.println("---Cola en el comedor---");
-      while(ref!=null){
-       elementos += ref.data.toString() + "\n";
-        ref = ref.siguiente;
-      }
-    System.out.print(elementos);
+    System.out.println(elementos);
     
     elementos="";
-    }
+  }
     
 }
+
+

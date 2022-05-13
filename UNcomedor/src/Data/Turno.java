@@ -40,7 +40,7 @@ public class Turno {
     }
     public String toString()
 	{
-		return this.numTurno + " " + turnoCom.toString() + " "+ this.turnoUsuario.toString() +"\n"; //
+		return this.numTurno + " " + turnoCom.toString() + " "+ this.turnoUsuario.toString(); 
 	}
 
 
