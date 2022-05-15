@@ -8,8 +8,8 @@ public class ListComedores {
 
     public static void main(String[] args) throws Exception {
         ListComedores Comedores = new ListComedores();
-
-        while(true) {
+        boolean proceso = true;
+        while(proceso) {
 
             System.out.println("");
             menu();
@@ -21,6 +21,7 @@ public class ListComedores {
                         scanner.nextLine();
                         boolean finish = false;
                         System.out.println("Ingrese los comedores");
+                        long inicioInsert = System.currentTimeMillis();
                         while (finish != true) {
                             String cadena = scanner.nextLine();
                             if (cadena.charAt(0) != '-') {// entrar un - para terminar el ingreso de usuarios
@@ -32,19 +33,27 @@ public class ListComedores {
                                 System.out.println("");
                             } else {
                                 System.out.println("Los datos han sido ingresados");
+                                long finInsert = System.currentTimeMillis();
+                                long tiempoInsert = (finInsert-inicioInsert);
+                                System.out.println("Tiempo de ejecución: " + tiempoInsert + " milisegundos");
                                 break;
                             }
                         }
                         break;
 
                     case 2:
+
                         scanner.nextLine();
                         System.out.println("Ingrese el nombre del comedor que quiere buscar");
                         String cadena = scanner.nextLine();
                         int capacidadBuscada = 1; //Solo se necesita el nombre, pero como pasamos un objeto, ponemos cualquier valor en capacidad
                         String nombreComedorBuscado = cadena;
                         Comedor queryBusqueda = new Comedor(capacidadBuscada, nombreComedorBuscado);
+                        long inicioSearch = System.currentTimeMillis();
                         Comedores.search(queryBusqueda);
+                        long finSearch = System.currentTimeMillis();
+                        long tiempoSearch = (finSearch-inicioSearch);
+                        System.out.println("Tiempo de ejecución: " + tiempoSearch + " milisegundos");
                         break;
 
                     case 3:
@@ -53,19 +62,27 @@ public class ListComedores {
                         String eliminado = scanner.nextLine();
                         int capacidadEliminada = 1; //Solo se necesita el nombre, pero como pasamos un objeto, ponemos cualquier valor en capacidad
                         String nombreComedorEliminado = eliminado;
+                        long inicioDelete = System.currentTimeMillis();
                         Comedor queryEliminado = new Comedor(capacidadEliminada, nombreComedorEliminado);
+                        long finDelete = System.currentTimeMillis();
                         Comedores.delete(queryEliminado);
+                        long tiempoDelete = (finDelete-inicioDelete);
+                        System.out.println("Tiempo de ejecución: " + tiempoDelete + " milisegundos");
                         break;
 
                     case 4:
-                        boolean comedoresEmpty = Comedores.empty();
-                        if (comedoresEmpty){
+                        if (Comedores.empty()){
                             System.out.println("No hay comedores");
                         }
                         else{
                             Comedores.output();
                         }
                         break;
+                    case 5:
+                        System.out.println("Terminado");
+                        proceso = false;
+                        break;
+
 
                     default:
                         System.out.println("Ingrese una opción válida");
@@ -83,7 +100,7 @@ public class ListComedores {
         Comedores.output();*/
 
     }
-    int N = 1024;
+    int N = 100024;
     Comedor larray[];
 
     private int position, count;
