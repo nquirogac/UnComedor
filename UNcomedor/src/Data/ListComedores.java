@@ -1,6 +1,7 @@
 package Data;
 
 import java.util.Scanner;
+import java.io.File;
 
 public class ListComedores {
 
@@ -15,13 +16,40 @@ public class ListComedores {
             menu();
             //menu
             int seleccion = selector();
-            if (seleccion!=5){
+            if (seleccion!=0){
                 switch (seleccion) {
                     case 1:
+                        //Inserción por archivo .csv
+                        Scanner sc = new Scanner(new File("/home/andres/Documentos/Estructuras de datos/Proyecto/MockData ListComedores/Cien mil datos 6.csv"));
+                        //sc.useDelimiter(",");
+                        int counter = 0;
+                        System.out.println("Ingresando comedores ...");
+                        long inicioInsert = System.currentTimeMillis();
+                        while (sc.hasNext()) {
+                            counter++;
+
+                            String[] cadena = sc.next().split(",");
+
+                            int capacidad = Integer.parseInt(cadena[0]);
+                            String nombreComedor = cadena[1];
+
+                            //Inserción en la lista
+                            Comedores.insert(new Comedor(capacidad, nombreComedor));
+
+                            }
+                        sc.close();
+                            System.out.println("Los datos han sido ingresados");
+                            //System.out.println(counter);
+                            long finInsert = System.currentTimeMillis();
+                            long tiempoInsert = (finInsert-inicioInsert);
+                            System.out.println("Tiempo de ejecución: " + tiempoInsert + " milisegundos");
+                            break;
+
+                        //Inserción por consola
+                    /*
                         scanner.nextLine();
                         boolean finish = false;
                         System.out.println("Ingrese los comedores");
-                        long inicioInsert = System.currentTimeMillis();
                         while (finish != true) {
                             String cadena = scanner.nextLine();
                             if (cadena.charAt(0) != '-') {// entrar un - para terminar el ingreso de usuarios
@@ -33,13 +61,11 @@ public class ListComedores {
                                 System.out.println("");
                             } else {
                                 System.out.println("Los datos han sido ingresados");
-                                long finInsert = System.currentTimeMillis();
-                                long tiempoInsert = (finInsert-inicioInsert);
-                                System.out.println("Tiempo de ejecución: " + tiempoInsert + " milisegundos");
                                 break;
                             }
                         }
-                        break;
+                        break;*/
+
 
                     case 2:
 
@@ -64,8 +90,8 @@ public class ListComedores {
                         String nombreComedorEliminado = eliminado;
                         long inicioDelete = System.currentTimeMillis();
                         Comedor queryEliminado = new Comedor(capacidadEliminada, nombreComedorEliminado);
-                        long finDelete = System.currentTimeMillis();
                         Comedores.delete(queryEliminado);
+                        long finDelete = System.currentTimeMillis();
                         long tiempoDelete = (finDelete-inicioDelete);
                         System.out.println("Tiempo de ejecución: " + tiempoDelete + " milisegundos");
                         break;
@@ -81,7 +107,9 @@ public class ListComedores {
                     case 5:
                         System.out.println("Terminado");
                         proceso = false;
+                        System.exit(0);
                         break;
+
 
 
                     default:
@@ -100,7 +128,7 @@ public class ListComedores {
         Comedores.output();*/
 
     }
-    int N = 100024;
+    int N = 1000004;
     Comedor larray[];
 
     private int position, count;
@@ -128,24 +156,25 @@ public class ListComedores {
                 }
                 count--;
                 deleted = true;
+                System.out.println("Comedor eliminado");
             } else {
-                System.out.println("List is Empty");
+                //System.out.println("List is Empty");
             }
         }
-        System.out.println("Comedor eliminado");
+
         return deleted;
     }
 
     public boolean insert(Comedor item) {
         boolean inserted = false;
         if (!full()) {
-
             for (int j = count; j > position; j--) {
                 larray[j] = larray[j - 1];
             }
             larray[position] = item;
             count++;
             inserted = true;
+
 
         }
         else {
@@ -189,7 +218,7 @@ public class ListComedores {
     }
 
     public static void menu(){
-        System.out.println("Güelcom tu ListComedores :D \nIngrese el número de la opción que desea \n1. Ingresar comedores\n2. Buscar un comedor\n3. Eliminar un comedor\n4. Mostrar comedores\n5. Salir");
+        System.out.println("Adminstración ListComedores :D \nIngrese el número de la opción que desea \n1. Ingresar comedores\n2. Buscar un comedor\n3. Eliminar un comedor\n4. Mostrar comedores\n5. Salir");
     }
 
     public static int selector(){
