@@ -150,7 +150,7 @@ public class ListComedores {
         boolean deleted = false;
         if (!empty()) {
             if (search(item)) {
-                System.out.println("Eliminando comedor");
+                System.out.println("Eliminando comedor...");
                 for (int j = position; j < count - 1; j++) {
                     larray[j] = larray[j + 1];
                 }
